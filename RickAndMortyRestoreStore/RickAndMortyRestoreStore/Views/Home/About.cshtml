@@ -1,0 +1,45 @@
+﻿@using RickAndMortyRestoreStore.Models.ViewModels
+@model List<JobViewModel> 
+<div class="container">
+    @if (Model.Any()) {
+        foreach(var rickquest in Model) { 
+            <div class="col s12 m12">
+                <div class="card horizontal">
+                    <div class="card-image">
+                        <img src=@(String.Format("~/Content/img/Rickquest/Before/{0}",rickquest.MediaBefore))>
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <div class="row left">
+                                <h5>@rickquest.Name</h5>
+                            </div>
+                            <div class="row">
+                                <span class="label-tag">Start Date:</span><span class="content-tag">@rickquest.StartDate</span>
+                            </div>
+                            <div class="row">
+                                <span class="label-tag">End Date:</span><span class="content-tag">@rickquest.EndDate</span>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <a href=@Url.RouteUrl("Job_Details", new { name = rickquest.Name }) class="waves-effect waves-light btn blue" ><i class="material-icons">edit_mode</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row center">
+            <div class="col s12 m12 l12">
+                <br/>
+                <h3 class="no-jobs">So... No jobs uh!</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <img src="~/Content/img/SiteImages/No_jobs.jpg" class="responsive-img" />
+            </div>
+        </div>   
+    }
+</div>

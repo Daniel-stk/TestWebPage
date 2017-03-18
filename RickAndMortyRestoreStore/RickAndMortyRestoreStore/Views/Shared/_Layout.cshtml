@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    @Styles.Render("~/Content/styles")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="black">
+        <div class="nav-wrapper relative-container">
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="left hide-on-med-and-down">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Our Jobs", "About", "Home")</li>
+                <li>@Html.ActionLink("Rickquest", "Contact", "Home")</li>
+            </ul>
+            <div class="logo">
+                <img src="~/Content/img/SiteImages/Rick_and_Morty_logo.png" class="responsive-image"/>
+            </div>
+            <ul class="side-nav" id="mobile-demo">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Our Jobs", "About", "Home")</li>
+                <li>@Html.ActionLink("Rickquest", "Contact", "Home")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+    <setion>
+        @RenderBody()
+        <footer class="page-footer black">
+            <div class="footer-copyright">
+                <div class="container">
+                    Made by <span class="orange-text text-lighten-3">The Rick</span>
+                </div>
+            </div>
+        </footer>
+    </setion>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/pagescripts")
+    @Scripts.Render("~/bundles/materialize")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

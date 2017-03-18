@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Time to fix stuff soooon!";
+}
+
+<div class="parallax-container realative-container">
+    <div class="parallax">
+        <img src="~/Content/img/SiteImages/welcome_to_rick_store.jpg"/>
+    </div>
+    <div class="box-content">
+        <h4 class="no-margin"><span class="white tag">WELCOME!!</span><span class="white-text"> TO RICK RESTORE SHOP</span></h4>
+    </div>
+    <div class="box-content sub">
+        <h5 class="no-margin"><span class="blue tag white-text">TIME TO FIX STUFF SOOOON!</span></h5>
+    </div>
+</div>
+    <div class="row">
+        <div class="col s12 m6">
+            <a href=@Url.RouteUrl("Get_Jobs",null)>
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+                    <h5 class="center">Our Jobs</h5>
+
+                    <p class="light center black-text">Check our finished jobs! We got a full list of awsome alien items that were restored by us. We are good at what we do and we do it for a Rickdiculous price so come and check our finished jobs!</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col s12 m6">
+            <a href=@Url.RouteUrl("Make_Rickquest",null)>
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+                    <h5 class="center">Make a Rick-quest</h5>
+
+                    <p class="light center black-text">Use our awesome page to send a Rickquest so we can start working on your stuff sooon! We'll check it and tell you what's need to be done so your item returns as new stop thinking about it and do it now!!</p>
+                </div>
+             </a>
+        </div>
+    </div>

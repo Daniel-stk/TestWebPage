@@ -1,0 +1,71 @@
+﻿@using RickAndMortyRestoreStore.Models.ViewModels
+@model CommentsJobsViewModel
+<div class="container">
+    <div class="row">
+        <div class="col s12 m7">
+            <div class="card">
+                <div class="card-image">
+                    <img src=@String.Format("~/Content/img/Rickquest/After/{0}",Model.Job.MediaAfter)>
+                    <span class="card-title">@Model.Job.Name</span>
+                </div>
+                <div class="card-content">
+                    <p>@Model.Job.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l12 left">
+            <h5>Deja un comentario</h5>
+        </div>
+    </div> 
+    <div class="row">
+        @using (Html.BeginForm("PreviousJobs", "Home", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                @Html.HiddenFor(m => m.Job.JobId)
+                <div class="input-field col s12 m12 l12">
+                    @Html.TextBoxFor(m => m.Comments.UserName)
+                    @Html.LabelFor(m => m.Comments.UserName)
+                </div>
+                <div class="input-field col s12 m12 l12">
+                    @Html.TextAreaFor(m => m.Comments.Comment, new { @class = "materialize-textarea"})
+                    @Html.LabelFor(m => m.Comments.Comment)
+                </div>
+            </div>
+            <div class="row right">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn waves-effect waves-light black" value="Comment" >
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l12 left">
+            <h5>Comentarios</h5>
+        </div>
+    </div>
+    @if (Model.Job.Comments.Any())
+    {
+        foreach(var comment in Model.Job.Comments)
+        {
+            <div class="row">
+                <span class="label-tag">User:</span><span class="content-tag"> @comment.UserName</span>
+                <p class="content-tag">@comment.Comment</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No Comments at all sooon!</p>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
