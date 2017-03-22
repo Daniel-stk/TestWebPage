@@ -1,15 +1,15 @@
 ﻿@using RickAndMortyRestoreStore.Models.ViewModels
-@model CommentsJobsViewModel
+@model JobViewModel
 <div class="container">
     <div class="row">
         <div class="col s12 m7">
             <div class="card">
                 <div class="card-image">
-                    <img src=@String.Format("~/Content/img/Rickquest/After/{0}",Model.Job.MediaAfter)>
-                    <span class="card-title">@Model.Job.Name</span>
+                    <img src=@String.Format("~/Content/img/Rickquest/After/{0}",Model.MediaAfter)>
+                    <span class="card-title">@Model.Name</span>
                 </div>
                 <div class="card-content">
-                    <p>@Model.Job.Description</p>
+                    <p>@Model.Description</p>
                 </div>
             </div>
         </div>
@@ -24,14 +24,14 @@
         {
             @Html.AntiForgeryToken()
             <div class="row">
-                @Html.HiddenFor(m => m.Job.JobId)
+                @Html.HiddenFor(m => m.JobId)
                 <div class="input-field col s12 m12 l12">
-                    @Html.TextBoxFor(m => m.Comments.UserName)
-                    @Html.LabelFor(m => m.Comments.UserName)
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.LabelFor(m => m.UserName)
                 </div>
                 <div class="input-field col s12 m12 l12">
-                    @Html.TextAreaFor(m => m.Comments.Comment, new { @class = "materialize-textarea"})
-                    @Html.LabelFor(m => m.Comments.Comment)
+                    @Html.TextAreaFor(m => m.Comment, new { @class = "materialize-textarea"})
+                    @Html.LabelFor(m => m.Comment)
                 </div>
             </div>
             <div class="row right">
@@ -45,15 +45,19 @@
     </div>
     <div class="row">
         <div class="col s12 m12 l12 left">
-            <h5>Comentarios</h5>
+            <h5>Comments</h5>
         </div>
     </div>
-    @if (Model.Job.Comments.Any())
+    
+    
+   
+    @if (Model.Comments.Any())
     {
-        foreach(var comment in Model.Job.Comments)
+        foreach(var comment in Model.Comments)
         {
             <div class="row">
                 <span class="label-tag">User:</span><span class="content-tag"> @comment.UserName</span>
+                <br />
                 <p class="content-tag">@comment.Comment</p>
             </div>
         }
@@ -66,6 +70,13 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        if ('@ViewBag.Success') {
+            Materialize.toast('@ViewBag.Success', 3000, 'success')
+        } if ('@ViewBag.Failed') {
+            Materialize.toast('@ViewBag.Failed', 3000, 'danger')
+        }
+    </script>
 }
 
 

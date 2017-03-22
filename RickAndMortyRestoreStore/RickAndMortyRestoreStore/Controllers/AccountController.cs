@@ -75,7 +75,7 @@ namespace RickAndMortyRestoreStore.Controllers
             
             // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
             // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.User, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -91,6 +91,8 @@ namespace RickAndMortyRestoreStore.Controllers
                     return View(model);
             }
         }
+
+       
 
         //
         // GET: /Account/VerifyCode
@@ -152,7 +154,7 @@ namespace RickAndMortyRestoreStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.User, Email = model.Email,IsEnabled = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

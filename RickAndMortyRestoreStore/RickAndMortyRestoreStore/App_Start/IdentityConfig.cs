@@ -105,5 +105,23 @@ namespace RickAndMortyRestoreStore
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
+
+        public override Task<SignInStatus> PasswordSignInAsync(string userName, string password, bool rememberMe, bool shouldLockout)
+        {
+            var user = UserManager.FindByNameAsync(userName).Result;
+            if (user != null)
+            {
+                if ((user.IsEnabled.HasValue && !user.IsEnabled.Value) || !user.IsEnabled.HasValue)
+                {
+                    return Task.FromResult(SignInStatus.LockedOut);
+                }
+
+                return base.PasswordSignInAsync(userName, password, rememberMe, shouldLockout);
+            }else
+            {
+                return Task.FromResult(SignInStatus.Failure);
+            }
+
+        }
     }
 }

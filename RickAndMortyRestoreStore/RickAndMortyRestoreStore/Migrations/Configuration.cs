@@ -17,7 +17,7 @@ namespace RickAndMortyRestoreStore.Migrations
 
         protected override void Seed(RickAndMortyRestoreStore.Models.ApplicationDbContext context)
         {
-            if (!context.Users.Any())
+            if (context.Users.Any())
             {
                 var userStore = new UserStore<ApplicationUser>(context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
@@ -33,17 +33,18 @@ namespace RickAndMortyRestoreStore.Migrations
                         roleManager.Create(roleToCreate);
                     }
                 }
-                var rick = userManager.FindByName("Rick");
+                var rick = userManager.FindByName("TheRick");
                 if (rick == null)
                 {
                     var newRick = new ApplicationUser()
                     {
-                        UserName = "Rick",
-                        Email = "ricktastic@therick.com",
-                        PhoneNumber = "(614)136-7727"
+                        UserName = "TheRick",
+                        Email = "sanchez@therick.com",
+                        PhoneNumber = "(614)136-7727",
+                        IsEnabled = true
                     };
 
-                    userManager.Create(newRick, "MortyLittleBastard5103");
+                    userManager.Create(newRick, "ImTheRickSanchez5103!");
                     userManager.SetLockoutEnabled(newRick.Id, false);
                     userManager.AddToRole(newRick.Id, "ShopOwner");
                     userManager.AddToRole(newRick.Id, "ShopAdministrator");

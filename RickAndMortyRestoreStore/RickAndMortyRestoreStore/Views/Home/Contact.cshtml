@@ -1,1 +1,75 @@
-﻿
+﻿@using RickAndMortyRestoreStore.Models.ViewModels
+@model RequestViewModel
+<div class="header-rickquest">
+    <div class="container">
+        <div class="row">
+            <div class="col s8 m8 l8 header-padding">
+                <div class="box-header">
+                    <span class="white-text header-title">We have no choice Morty</span><br />
+                    <span class="orange-text header-subtitle">We-we-we ha-ha-have to take his/her Rickquest</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row center">
+        <h5>Make your Rickquest don't forget to send a pictura</h5>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("MakeRickquest","Home",FormMethod.Post,new { role = "form", enctype = "multipart/form-data", @class="col s12 m12 l12"}))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.LabelFor(m => m.UserName)    
+                </div>
+                <div class="input-field col s12">
+                    @Html.TextBoxFor(m => m.UserEmail)
+                    @Html.LabelFor(m => m.UserEmail)
+                </div>
+                <div class="input-field col s12">
+                    @Html.TextBoxFor(m => m.UserPhone)
+                    @Html.LabelFor(m => m.UserPhone)
+                </div>
+                                <div class="col s12">
+                    <div class="file-field input-field">
+                        <div class="btn black">
+                            <span>
+                                Media
+                            </span>
+                            <input type="file" name="image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            @Html.TextBoxFor(m => m.Media, new { @class = "file-path validate", @type = "text" })
+                        </div>
+                    </div>
+                </div>
+                <div class="input-field col s12">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "materialize-textarea" })
+                    @Html.LabelFor(m => m.Description)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4 offset-s8 ">
+                        <button type="submit" class="btn waves-effect waves-light black" value="Request">
+                           RICKQUEST <i class="material-icons right">send</i>
+                        </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        if ('@ViewBag.Success') {
+            Materialize.toast('@ViewBag.Success', 3000, 'success')
+        } if ('@ViewBag.Failed') {
+            Materialize.toast('@ViewBag.Failed', 3000, 'danger')
+        }
+    </script>
+}

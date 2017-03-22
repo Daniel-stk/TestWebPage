@@ -13,10 +13,9 @@ namespace RickAndMortyRestoreStore.Repositories
     interface IRepository<T,K> where T :class  where K: class
     {
        
-        bool Add(DbSet<T> entity,T model,Database db);
-        bool Update(DbSet<T> entity);
-        bool Delete(DbSet<T> entity);
-        bool Save();
+        bool Add(ApplicationDbContext context,T model);
+        bool Update(ApplicationDbContext context,T model);
+        bool Delete(ApplicationDbContext context, T model);
         List<K> GetAll(DbSet<T> entity);
         K FindById(DbSet<T> entity, int id);
         List<K> FindByCondition(DbSet<T> entity,Expression<Func<T,bool>> expression);

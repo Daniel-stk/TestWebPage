@@ -49,24 +49,28 @@ namespace RickAndMortyRestoreStore.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Correo electrónico")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "User")]
+        public string User { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "¿Recordar cuenta?")]
+        [Display(Name = "Rembember me?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name = "User")]
+        public string User { get; set; }
+
         [Required]
         [EmailAddress]
-        [Display(Name = "Correo electrónico")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]

@@ -27,6 +27,9 @@ namespace RickAndMortyRestoreStore
             bundles.Add(new ScriptBundle("~/bundles/pagescripts").Include(
                     "~/Scripts/scripts.js"   
                 ));
+            bundles.Add(new ScriptBundle("~/bundles/confirmation").Include(
+                    "~/Scripts/confirmationscripts.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/styles").Include(
                       "~/Content/css/materialize.css",

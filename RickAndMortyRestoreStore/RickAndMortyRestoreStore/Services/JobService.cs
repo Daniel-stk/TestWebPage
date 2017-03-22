@@ -22,9 +22,14 @@ namespace RickAndMortyRestoreStore.Services
             
         }
 
+        public List<JobViewModel> GetPendingJobs()
+        {
+            return repository.FindByCondition(Context.Jobs, j => j.State.Equals("Pending"));
+        }
+
         public JobViewModel GetJobByTitle(string title)
         {
-            return repository.FindByCondition(Context.Jobs, j => j.Name.Equals(title)).FirstOrDefault();
+           return repository.FindByCondition(Context.Jobs, j => j.Name.Equals(title)).FirstOrDefault();
         }
 
 

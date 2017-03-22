@@ -102,3 +102,4 @@ C:\Users\Usuario\Source\Workspaces\WebTest\RickAndMortyRestoreStore\RickAndMorty
 C:\Users\Usuario\Source\Workspaces\WebTest\RickAndMortyRestoreStore\RickAndMortyRestoreStore\obj\Debug\RickAndMortyRestoreStore.Migrations.InitalMigration.resources
 C:\Users\Usuario\Source\Workspaces\WebTest\RickAndMortyRestoreStore\RickAndMortyRestoreStore\obj\Debug\RickAndMortyRestoreStore.csproj.GenerateResource.Cache
 C:\Users\Usuario\Source\Workspaces\WebTest\RickAndMortyRestoreStore\RickAndMortyRestoreStore\obj\Debug\RickAndMortyRestoreStore.Migrations.FixJobCommentRelation.resources
+C:\Users\Usuario\Source\Workspaces\WebTest\RickAndMortyRestoreStore\RickAndMortyRestoreStore\obj\Debug\RickAndMortyRestoreStore.Migrations.AddedEnableFieldToIdentity.resources
