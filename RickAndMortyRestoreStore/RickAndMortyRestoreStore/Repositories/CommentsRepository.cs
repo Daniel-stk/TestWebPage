@@ -21,8 +21,9 @@ namespace RickAndMortyRestoreStore.Repositories
                     context.SaveChanges();
                     transaction.Commit();
                 }
-                catch
+                catch(Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     return false;
                 }
             }
@@ -36,7 +37,19 @@ namespace RickAndMortyRestoreStore.Repositories
 
         public List<CommentsViewModel> FindByCondition(DbSet<CommentModel> entity, Expression<Func<CommentModel, bool>> expression)
         {
-            throw new NotImplementedException();
+            var commentsViewModel = new List<CommentsViewModel>();
+            var comments = entity.Where(expression);
+            foreach(var comment in comments)
+            {
+                commentsViewModel.Add(new CommentsViewModel()
+                {
+                    UserName = comment.UserName,
+                    Comment = comment.CommentText,
+                    JobId = comment.JobId
+                });
+            }
+            return commentsViewModel;
+
         }
 
         public CommentsViewModel FindById(DbSet<CommentModel> entity, int id)

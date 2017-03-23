@@ -14,7 +14,20 @@ namespace RickAndMortyRestoreStore.Repositories
     {
         public bool Add(ApplicationDbContext context, JobModel model)
         {
-            throw new NotImplementedException();
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    context.Jobs.Add(model);
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public bool Delete(ApplicationDbContext context, JobModel model)
@@ -41,30 +54,33 @@ namespace RickAndMortyRestoreStore.Repositories
                     StartDate = Job.StartDate,
                     Name = Job.Name,
                     EndDate = Job.EndDate,
-                    Comments = new List<CommentsViewModel>(),
                     RouteMediaBefore = System.IO.Path.Combine(baseBefore, Job.MediaBefore),
-                    RouteMediaAfter = System.IO.Path.Combine(baseAfter, Job.MediaAfter)
                 });
-                if(Job.Comments != null)
+                if (Job.MediaAfter != null)
                 {
-                   var commentsViewModel =  result.Where(j => j.JobId == Job.JobId).FirstOrDefault().Comments; 
-                   foreach(var comment in Job.Comments)
-                   {
-                        commentsViewModel.Add(new CommentsViewModel() {
-                            UserName = comment.UserName,
-                            Comment = comment.CommentText
-                        });    
-                   }
+                    result.Where(j => j.JobId == Job.JobId).FirstOrDefault().RouteMediaAfter = System.IO.Path.Combine(baseAfter, Job.MediaAfter);
                 }
-
-            }
+                
+           }
             return result;
 
         }
 
         public JobViewModel FindById(DbSet<JobModel> entity, int id)
         {
-            throw new NotImplementedException();
+            var viewModel = new JobViewModel();
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            var baseBefore = urlHelper.Content("~/Content/img/Rickquest/Before");
+            var model = entity.Find(id);
+
+            viewModel.RouteMediaBefore = System.IO.Path.Combine(baseBefore, model.MediaBefore);
+            viewModel.Name = model.Name;
+            viewModel.StartDate = model.StartDate;
+            viewModel.JobId = model.JobId;
+            viewModel.Description = model.Description;
+
+            return viewModel;
+            
         }
 
         public List<JobViewModel> GetAll(DbSet<JobModel> entity)
@@ -74,7 +90,22 @@ namespace RickAndMortyRestoreStore.Repositories
 
         public bool Update(ApplicationDbContext context, JobModel model)
         {
-            throw new NotImplementedException();
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    model.EndDate = DateTime.Now;
+                    model.State = "Done";
+                    context.Entry(model).State = EntityState.Modified;
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

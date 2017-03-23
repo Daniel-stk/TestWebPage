@@ -1,0 +1,53 @@
+﻿@using RickAndMortyRestoreStore.Models.ViewModels
+@model JobViewModel
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div calss="row">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h5>@Model.Name</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <img src="@Model.RouteMediaBefore" class="responsive-img"/>
+            </div>
+            <div class="col s12 m6 l6">
+                <div class="row">
+                    <span class="label-tag">Start Date:</span><span class="content-tag">@Model.StartDate</span>
+                </div>
+                <div class="row">
+                    <span class="label-tag">Summary:</span><span class="content-tag">@Model.Description</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("FinishJob", "Administration", FormMethod.Post, new { role = "form", enctype = "multipart/form-data", @class = "col s12 m12 l12" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.JobId)
+                <div class="col s12">
+                    <div class="file-field input-field">
+                        <div class="btn black">
+                            <span>
+                                Media
+                            </span>
+                            <input type="file" name="image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            @Html.TextBoxFor(m => m.MediaAfter, new { @class = "file-path validate", @type = "text" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4 offset-s8 ">
+                    <button type="submit" class="btn waves-effect waves-light black" value="Request">
+                        Finish Job <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ namespace RickAndMortyRestoreStore.Services
             repository = new CommentsRepository();
         }
 
-        public bool PostComment(CommentsViewModel payload)
+        public bool PostComment(JobViewModel payload)
         {
             CommentModel model = new CommentModel() {
                     JobId = payload.JobId,
@@ -24,6 +24,11 @@ namespace RickAndMortyRestoreStore.Services
                     CommentText = payload.Comment
             };
             return repository.Add(Context,model);
+        }
+
+        public List<CommentsViewModel> GetCommentsByJobId(int JobId)
+        {
+            return repository.FindByCondition(Context.Comments,c => c.JobId == JobId);
         }
     }
 }

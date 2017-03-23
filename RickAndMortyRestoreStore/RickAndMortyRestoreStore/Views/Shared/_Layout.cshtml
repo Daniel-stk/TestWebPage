@@ -18,6 +18,10 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("Our Jobs", "About", "Home")</li>
                 <li>@Html.ActionLink("Rickquest", "Contact", "Home")</li>
+                @if (User.IsInRole("ShopOwner") || User.IsInRole("ShopAdministrator"))
+                {
+                    <li>@Html.ActionLink("Administrator", "RequestAdministration", "Administration")</li>
+                }
             </ul>
             <div class="logo">
                 <img src="~/Content/img/SiteImages/Rick_and_Morty_logo.png" class="responsive-image"/>

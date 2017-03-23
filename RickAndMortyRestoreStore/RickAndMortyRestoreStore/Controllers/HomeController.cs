@@ -33,6 +33,7 @@ namespace RickAndMortyRestoreStore.Controllers
         public ActionResult PreviousJobs(string name)
         {
             var job = JobServiceProvider.GetJobByTitle(name);
+            job.Comments = CommentServiceProvider.GetCommentsByJobId(job.JobId);
             if (TempData["success"] != null)
             {
                 ViewBag.Success = "Your comment was posted I hope you are happy about it";
@@ -47,7 +48,7 @@ namespace RickAndMortyRestoreStore.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("Jobs/Previous/Entry")]
-        public ActionResult PreviousJobs(CommentsViewModel payload)
+        public ActionResult PreviousJobs(JobViewModel payload)
         {
             var success = CommentServiceProvider.PostComment(payload);
             if (success)
@@ -58,7 +59,7 @@ namespace RickAndMortyRestoreStore.Controllers
 
                 TempData["failed"] = true;
             }
-            return RedirectToAction("PreviousJobs");
+            return RedirectToRoute("Job_Details",new { name = payload.Name});
         }
 
         [AllowAnonymous]
